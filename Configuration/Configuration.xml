@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Environment>
+    <!-- TimeOut -->
+    <TimeOut>10</TimeOut>
+    <Sleep>5000</Sleep>
+
+    <PlatformName>web</PlatformName>
+
+    <!-- Web -->
+    <BrowserName>chrome</BrowserName>
+    <url>https://www.globalsqa.com/angularJs-protractor/BankingProject/#/login</url>
+    <selectedUser>Harry Potter</selectedUser>
+    <depositAmount>200</depositAmount>
+    <withdrawAmount>100</withdrawAmount>
+    <ImageRepo>./ImageRepository/</ImageRepo>
+
+    <!-- API -->
+    <Base_api_url></Base_api_url>
+    <api_token></api_token>
+    <Endpoint1></Endpoint1>
+    <query1></query1>
+    <filePath>./jSon/</filePath>
+
+</Environment>

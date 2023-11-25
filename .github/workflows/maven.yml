@@ -29,10 +29,10 @@ jobs:
         cache: maven                    
     - name: Install Chrome Webdriver
       run: |
-            wget -q -O $APP_DIR/chromedriver_$CHROME_DRIVER_VERSION_linux64.zip https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip
-            unzip $APP_DIR/chromedriver_$CHROME_DRIVER_VERSION_linux64.zip -d /usr/bin/
+            sudo wget -q -O $APP_DIR/chromedriver_$CHROME_DRIVER_VERSION_linux64.zip https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip
+            sudo unzip $APP_DIR/chromedriver_$CHROME_DRIVER_VERSION_linux64.zip -d /usr/bin/
             chmod +x /usr/bin/chromedriver
-            rm -rf $APP_DIR/chromedriver_$CHROME_DRIVER_VERSION_linux64.zip
+            sudo rm -rf $APP_DIR/chromedriver_$CHROME_DRIVER_VERSION_linux64.zip
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 

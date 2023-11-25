@@ -54,6 +54,7 @@
       <artifactId>webdriver-chrome</artifactId>
       <version>0.9.7376</version>
     </dependency>
+
     <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-devtools -->
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>

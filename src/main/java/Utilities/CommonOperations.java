@@ -73,6 +73,7 @@ public class CommonOperations extends Base {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
+        options.addArguments("--headless");
         WebDriverManager.chromedriver().capabilities(new ChromeOptions().addArguments("--no-sandbox")).setup();
         WebDriver driver = new ChromeDriver(options);
         return driver;

@@ -22,7 +22,10 @@ public class Listeners extends CommonOperations implements ITestListener
 
     public void onTestFailedButWithinSuccessPercentage(ITestResult test)
     {
-        // TODO Auto-generated method stub
+        System.out.println("------------------- The test " + test.getName() +  " has failed but within success percentage! -------------------");
+        if (!getData("PlatformName").equalsIgnoreCase("api")) {
+            saveScreenshot();
+        }
     }
 
     public void onTestFailure(ITestResult test)

@@ -92,18 +92,11 @@ public class CommonOperations extends Base {
         return driver;
     }
 
-    public static void initAPI() throws IOException {
-        RestAssured.baseURI = getData("Base_api_url");
-        httpRequest = RestAssured.given();
-    }
-
     //Get the selected testing platform and initializing the corresponding function
     @BeforeClass
     public void startSession() throws IOException {
         if(getData("PlatformName").equalsIgnoreCase("web"))
             initBrowser(getData("BrowserName"));
-        else if (getData("PlatformName").equalsIgnoreCase("api"))
-            initAPI();
         else
             throw new RuntimeException(("Invalid platform name"));
         ManagePages.init();

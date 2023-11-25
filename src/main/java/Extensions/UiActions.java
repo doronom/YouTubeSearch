@@ -13,6 +13,7 @@ import java.time.Duration;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -34,6 +35,7 @@ public class UiActions extends CommonOperations {
         wait.until(ExpectedConditions.elementToBeClickable(element));
         element.sendKeys(text);
     }
+
 
     //Send any Keyboard key to input field
     public static void sendKeyboardKey(WebElement element, Keys key) {
@@ -90,6 +92,11 @@ public class UiActions extends CommonOperations {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
+    public static void waitUntilElementIsClickable(WebElement element, int secondsToWait) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(secondsToWait));
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
+
 
     //Check if text exist in a single Web element
     public static boolean checkExists(WebElement element, String text) {
@@ -100,15 +107,18 @@ public class UiActions extends CommonOperations {
     }
 
     //Check if text exist in a list of Web elements
-    public static boolean checkExists(List<WebElement> elements, String text) {
-        if (elements == null || elements.isEmpty() || text == null || text.isEmpty()) {
-            return false;
-        }
+    public static boolean checkRowExistsInTable(List<WebElement> elements, Predicate<WebElement> rowPredicate, Consumer<WebElement> rowConsumer) {
+        FileLogger.info(String.format("Looping over %s elements", elements.size()));
+
         for (WebElement element : elements) {
-            if (element.getText().contains(text)) {
+            if (rowPredicate.test(element)) {
+                if (rowConsumer != null) {
+                    rowConsumer.accept(element);
+                }
                 return true;
             }
         }
+
         return false;
     }
 
@@ -128,7 +138,6 @@ public class UiActions extends CommonOperations {
 
         return false;
     }
-
 
     //This method is scrolling down the page to an element
     @Step("Scroll down to element")
@@ -179,7 +188,20 @@ public class UiActions extends CommonOperations {
         } catch (Exception e) {
             System.out.println("Element not found");
         }
+    }
 
+    public static void waitUntilAllElementsAreVisible(List<WebElement> elements, int secondsToWait) {
+        try {
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("return document.readyState;");
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(secondsToWait));
+
+            for (WebElement element : elements) {
+                wait.until(ExpectedConditions.visibilityOf(element));
+            }
+        } catch (Exception e) {
+            FileLogger.error("Not all elements were found or became visible within the specified time");
+        }
     }
 
 
@@ -223,7 +245,7 @@ public class UiActions extends CommonOperations {
         if (date == null) {
             throw new IllegalArgumentException("The date must not be null");
         } else {
-            // Create a Calendar instance and set its time to the input date
+            // Create a Calendar instance and set it's time to the input date
             Calendar c = Calendar.getInstance();
             c.setTime(date);
 
@@ -240,5 +262,20 @@ public class UiActions extends CommonOperations {
         } catch (Exception e) {
             // nothing to do
         }
+    }
+
+    public static void pauseVideoAfterSeconds(WebElement element, int seconds) {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        // Wait for the specified duration
+        try {
+            TimeUnit.SECONDS.sleep(seconds);
+        } catch (InterruptedException e) {
+            e.printStackTrace(); // Handle the exception if needed
+        }
+
+        // Pause the video after the specified duration using YouTube API
+        jsExecutor.executeScript("if (typeof yt !== 'undefined' && yt.player && yt.player.getPlayerByElement) { " +
+                "var player = yt.player.getPlayerByElement(arguments[0]); " +
+                "if (player) { player.pauseVideo(); } }", element);
     }
 }

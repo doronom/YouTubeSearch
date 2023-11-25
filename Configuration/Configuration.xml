@@ -8,17 +8,12 @@
 
     <!-- Web -->
     <BrowserName>chrome</BrowserName>
-    <url>https://www.globalsqa.com/angularJs-protractor/BankingProject/#/login</url>
-    <selectedUser>Harry Potter</selectedUser>
-    <depositAmount>200</depositAmount>
-    <withdrawAmount>100</withdrawAmount>
+    <url>https:/www.youtube.com/</url>
+    <searchPhrase>I Will Survive - Alien song</searchPhrase>
+    <expectedResultsPageTitle>I Will Survive - Alien song - YouTube</expectedResultsPageTitle>
+    <expectedArtistName>Gloria Gaynor</expectedArtistName>
     <ImageRepo>./ImageRepository/</ImageRepo>
+    <logPath>./logs/</logPath>
 
-    <!-- API -->
-    <Base_api_url></Base_api_url>
-    <api_token></api_token>
-    <Endpoint1></Endpoint1>
-    <query1></query1>
-    <filePath>./jSon/</filePath>
 
 </Environment>

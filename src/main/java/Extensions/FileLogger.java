@@ -1,8 +1,29 @@
 package Extensions;
+
+import java.io.IOException;
 import java.util.logging.*;
+
+import static Utilities.CommonOperations.getData;
 
 public class FileLogger {
     private static final Logger logger = Logger.getLogger(FileLogger.class.getName());
+
+    static {
+        try {
+            // Set up a FileHandler to write logs to a file
+            FileHandler fileHandler = new FileHandler(getData("logPath") + "test.log");
+            fileHandler.setFormatter(new SimpleFormatter());
+            logger.addHandler(fileHandler);
+
+            // Set the logger level to capture messages of all levels
+            logger.setLevel(Level.ALL);
+
+            // Set the level of the file handler to capture messages of all levels
+            fileHandler.setLevel(Level.ALL);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void info(String message) {
         logger.info(addMetaData(message));
@@ -29,6 +50,7 @@ public class FileLogger {
     }
 
     private static String addMetaData(String message) {
-        return "[" + ProcessHandle.current().pid() + " " + Thread.currentThread().getName() + "] " + message;
+        String metaData = "[" + ProcessHandle.current().pid() + " " + Thread.currentThread().getName() + "] " + message;
+        return metaData;
     }
 }

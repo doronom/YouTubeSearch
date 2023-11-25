@@ -1,10 +1,6 @@
 package Utilities;
 
-import PageObjects.MainPage;
-import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
-import org.json.JSONObject;
+import PageObjects.YouTubeSelectedVideoPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -22,15 +18,8 @@ public class Base {
     public static ImageDiff dif;
 
     public static String Platform;
-    public static MainPage xyzBankLogin;
+    public static PageObjects.YouTubeMainPage youTubeMainPage;
+    public static PageObjects.YouTubeSearchResultsPage searchResultsPage;
+    public static PageObjects.YouTubeSelectedVideoPage youTubeSelectedVideoPage;
 
-    public static PageObjects.CustomerLoginPage xyzBankCustomerLogin;
-
-    public static PageObjects.CustomerPage xyzBankCustomerPage;
-    public static PageObjects.CustomerTransactionsPage xyzBankCustomerTransactionsPage;
-
-    public static RequestSpecification httpRequest;
-    public static Response response;
-    public static JSONObject requestParams = new JSONObject();
-    public static JsonPath jp;
 }

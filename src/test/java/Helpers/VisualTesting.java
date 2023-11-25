@@ -1,8 +1,10 @@
 package Helpers;
 
+import PageObjects.YouTubeSearchResultsPage;
 import Utilities.CommonOperations;
+import Utilities.HelpersMethods;
+import WorkFlows.YouTubeSearchFlows;
 import org.testng.annotations.Test;
-import WorkFlows.XyzBankFlows;
 
 //This class demonstrate an automation visual testing
 
@@ -11,6 +13,7 @@ public class VisualTesting extends CommonOperations
     @Test
     public void takeScreenShot()
     {
-        XyzBankFlows.runXyzBankUserAccountValidationFlow();
+        YouTubeSearchFlows.navigateToYouTubeAndSearchPhrase(getData("searchPhrase"));
+        HelpersMethods.takeElementScreenShot(YouTubeSearchResultsPage.youTubeLogo, "youTubeLogo");
     }
 }

@@ -15,8 +15,6 @@ import WorkFlows.YouTubeSearchFlows;
 import java.util.ArrayList;
 import java.util.List;
 
-import static Extensions.Verifications.visualElement;
-
 @Listeners(Utilities.Listeners.class)
 public class YouTubeSearchTests extends CommonOperations {
 

@@ -16,9 +16,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 11
@@ -27,12 +25,6 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven                    
-    - name: Install Chrome Webdriver
-      run: |
-            sudo wget -q -O $APP_DIR/chromedriver_$CHROME_DRIVER_VERSION_linux64.zip https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip
-            sudo unzip $APP_DIR/chromedriver_$CHROME_DRIVER_VERSION_linux64.zip -d /usr/bin/
-            chmod +x /usr/bin/chromedriver
-            sudo rm -rf $APP_DIR/chromedriver_$CHROME_DRIVER_VERSION_linux64.zip
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
